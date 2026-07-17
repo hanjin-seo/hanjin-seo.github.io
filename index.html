@@ -12,253 +12,896 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hanjin Seo</title>
+  <meta
+    name="description"
+    content="Hanjin Seo is a postdoctoral researcher developing synthetic cell-like platforms through soft matter, microfluidics, and lab automation."
+  />
+  <meta name="theme-color" content="#102a2b" />
+
+  <title>Hanjin Seo — Synthetic Cells &amp; Soft Matter</title>
 
   <style>
     :root {
-      --bg: #f7f8fb;
-      --card: #ffffff;
-      --text: #1f2937;
-      --muted: #6b7280;
-      --line: #e5e7eb;
-      --accent: #2563eb;
-      --accent-soft: #dbeafe;
+      --ink: #172321;
+      --ink-soft: #53615e;
+      --forest: #143d3b;
+      --forest-deep: #0f2b2b;
+      --mint: #80c7b4;
+      --paper: #f3f2ed;
+      --paper-light: #faf9f5;
+      --white: #ffffff;
+      --line: rgba(23, 35, 33, 0.14);
+
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: Inter, ui-sans-serif, -apple-system,
+        BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      color: var(--ink);
+      background: var(--paper);
+      font-family: var(--sans);
       line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
     }
 
-    .container {
-      max-width: 920px;
-      margin: 0 auto;
-      padding: 48px 20px 80px;
+    a {
+      color: inherit;
     }
+
+    .shell {
+      width: min(1180px, calc(100% - 64px));
+      margin-inline: auto;
+    }
+
+    /* Header */
+
+    .site-header {
+      position: absolute;
+      z-index: 10;
+      top: 0;
+      left: 0;
+      width: 100%;
+      color: var(--white);
+    }
+
+    .nav {
+      min-height: 92px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .wordmark {
+      font-family: var(--serif);
+      font-size: 1.18rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      opacity: 0.82;
+      transition: opacity 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      opacity: 1;
+    }
+
+    /* Hero */
 
     .hero {
-      display: grid;
-      grid-template-columns: 180px 1fr;
-      gap: 28px;
-      align-items: center;
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      padding: 28px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+      min-height: 740px;
+      overflow: hidden;
+      position: relative;
+      color: var(--white);
+      background: var(--forest-deep);
     }
 
-    .photo {
-      width: 180px;
-      height: 180px;
-      border-radius: 20px;
-      object-fit: cover;
-      background: #eef2f7;
-      border: 1px solid var(--line);
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero::before {
+      width: 540px;
+      height: 540px;
+      right: -210px;
+      top: -180px;
+      border: 1px solid rgba(128, 199, 180, 0.24);
+      box-shadow:
+        0 0 0 84px rgba(128, 199, 180, 0.035),
+        0 0 0 168px rgba(128, 199, 180, 0.025);
+    }
+
+    .hero::after {
+      width: 11px;
+      height: 11px;
+      left: 6%;
+      bottom: 15%;
+      background: var(--mint);
+      box-shadow:
+        31px 22px 0 -3px rgba(128, 199, 180, 0.55),
+        62px -10px 0 -4px rgba(128, 199, 180, 0.32);
+    }
+
+    .hero-grid {
+      min-height: 740px;
+      padding-top: 130px;
+      padding-bottom: 72px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.12fr) minmax(340px, 0.72fr);
+      gap: clamp(56px, 8vw, 112px);
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin: 0 0 24px;
+      color: var(--mint);
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 32px;
+      height: 1px;
+      background: currentColor;
     }
 
     h1 {
-      margin: 0 0 8px;
-      font-size: 2.2rem;
-      line-height: 1.15;
+      margin: 0;
+      max-width: 700px;
+      font-family: var(--serif);
+      font-size: clamp(3.9rem, 7.4vw, 6.5rem);
+      font-weight: 400;
+      letter-spacing: -0.055em;
+      line-height: 0.92;
     }
 
-    .subtitle {
-      font-size: 1.05rem;
-      color: var(--muted);
-      margin-bottom: 16px;
+    h1 em {
+      display: block;
+      color: var(--mint);
+      font-weight: 400;
     }
 
-    .intro {
-      margin: 0 0 20px;
-      max-width: 680px;
+    .hero-copy {
+      max-width: 650px;
+      margin: 30px 0 0;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: clamp(1rem, 1.5vw, 1.14rem);
+      line-height: 1.75;
     }
 
-    .buttons {
+    .hero-copy strong {
+      color: var(--white);
+      font-weight: 650;
+    }
+
+    .actions {
+      margin-top: 36px;
       display: flex;
       flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      min-height: 48px;
+      padding: 0 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       gap: 10px;
-      margin-top: 8px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 10px 14px;
-      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 3px;
+      color: var(--white);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
       text-decoration: none;
-      font-weight: 600;
-      border: 1px solid var(--line);
-      color: var(--text);
-      background: white;
+      text-transform: uppercase;
+      transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease;
     }
 
-    .btn.primary {
-      background: var(--accent);
-      color: white;
-      border-color: var(--accent);
+    .button::after {
+      content: "↗";
+      font-size: 1rem;
     }
 
-    .section {
-      margin-top: 26px;
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      padding: 24px 28px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    .button.primary {
+      color: var(--forest-deep);
+      background: var(--mint);
+      border-color: var(--mint);
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-2px);
+      border-color: var(--mint);
+    }
+
+    /* Portrait */
+
+    .portrait-wrap {
+      position: relative;
+      align-self: stretch;
+      min-height: 485px;
+      display: flex;
+      align-items: center;
+    }
+
+    .portrait-frame {
+      width: 100%;
+      max-width: 410px;
+      margin-left: auto;
+      position: relative;
+    }
+
+    .portrait-frame::before {
+      content: "";
+      position: absolute;
+      inset: -18px 18px 18px -18px;
+      border: 1px solid rgba(128, 199, 180, 0.5);
+    }
+
+    .portrait {
+      position: relative;
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: center 28%;
+      filter: saturate(0.84) contrast(1.03);
+    }
+
+    .affiliation {
+      position: absolute;
+      left: -42px;
+      bottom: -24px;
+      width: min(315px, 88%);
+      padding: 20px 22px;
+      color: var(--ink);
+      background: var(--paper-light);
+      border-left: 4px solid var(--mint);
+      box-shadow: 0 16px 44px rgba(0, 0, 0, 0.18);
+    }
+
+    .affiliation span {
+      display: block;
+      margin-bottom: 3px;
+      color: #67716f;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .affiliation strong {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+    }
+
+    main {
+      overflow: hidden;
+    }
+
+    /* Research interests */
+
+    .research-band {
+      background: var(--white);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .research-grid {
+      min-height: 168px;
+      display: grid;
+      grid-template-columns: 0.85fr 2.2fr;
+      gap: 54px;
+      align-items: center;
+    }
+
+    .band-label {
+      margin: 0;
+      color: var(--forest);
+      font-size: 0.73rem;
+      font-weight: 800;
+      letter-spacing: 0.17em;
+      text-transform: uppercase;
+    }
+
+    .research-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 12px;
+    }
+
+    .research-list span {
+      padding: 8px 13px;
+      border: 1px solid #cbd5d1;
+      border-radius: 999px;
+      color: #344542;
+      font-size: 0.83rem;
+      font-weight: 650;
+      white-space: nowrap;
+    }
+
+    /* General sections */
+
+    .content-section {
+      padding: 110px 0;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: 0.78fr 2.2fr;
+      gap: 70px;
+    }
+
+    .section-kicker {
+      margin: 6px 0 0;
+      color: var(--forest);
+      font-size: 0.73rem;
+      font-weight: 800;
+      letter-spacing: 0.17em;
+      text-transform: uppercase;
     }
 
     h2 {
-      margin: 0 0 16px;
-      font-size: 1.2rem;
+      margin: 0 0 28px;
+      max-width: 790px;
+      font-family: var(--serif);
+      font-size: clamp(2.3rem, 4.4vw, 4.15rem);
+      font-weight: 400;
+      letter-spacing: -0.04em;
+      line-height: 1.04;
     }
 
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+    .about-lead {
+      margin: 0;
+      max-width: 810px;
+      color: #35423f;
+      font-size: 1.16rem;
+      line-height: 1.8;
     }
 
-    .chip {
-      background: var(--accent-soft);
-      color: #1d4ed8;
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: 0.95rem;
-      font-weight: 600;
+    .about-lead strong {
+      color: var(--forest);
     }
 
-    .pub {
-      padding: 14px 0;
+    /* Publications */
+
+    .publications {
+      background: var(--paper-light);
       border-top: 1px solid var(--line);
     }
 
-    .pub:first-of-type {
-      border-top: none;
-      padding-top: 0;
+    .pub-list {
+      border-top: 1px solid var(--ink);
     }
 
-    .pub-title {
+    .pub {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      gap: 26px;
+      align-items: start;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .pub-year {
+      color: var(--forest);
+      font-family: var(--serif);
+      font-size: 1.1rem;
       font-weight: 700;
-      margin-bottom: 4px;
+    }
+
+    .pub h3 {
+      margin: 0 0 8px;
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      line-height: 1.4;
     }
 
     .pub-meta {
-      color: var(--muted);
-      font-size: 0.96rem;
-      margin-bottom: 6px;
+      color: var(--ink-soft);
+      font-size: 0.88rem;
     }
 
-    .pub a {
-      color: var(--accent);
+    .pub-link {
+      margin-top: 2px;
+      color: var(--forest);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
       text-decoration: none;
-      font-weight: 600;
+      text-transform: uppercase;
+      white-space: nowrap;
     }
 
-    .footer {
-      text-align: center;
-      color: var(--muted);
-      margin-top: 24px;
-      font-size: 0.95rem;
+    .pub-link:hover,
+    .pub-link:focus-visible {
+      text-decoration: underline;
+      text-underline-offset: 4px;
     }
 
-    @media (max-width: 720px) {
-      .hero {
-        grid-template-columns: 1fr;
+    /* Contact */
+
+    .contact-strip {
+      padding: 72px 0;
+      color: var(--white);
+      background: var(--forest);
+    }
+
+    .contact-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .contact-strip h2 {
+      margin: 0;
+      max-width: 650px;
+      font-size: clamp(2.1rem, 4vw, 3.5rem);
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* Footer */
+
+    footer {
+      color: rgba(255, 255, 255, 0.58);
+      background: var(--forest-deep);
+    }
+
+    .footer-inner {
+      min-height: 88px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      font-size: 0.78rem;
+    }
+
+    /* Tablet */
+
+    @media (max-width: 880px) {
+      .shell {
+        width: min(100% - 40px, 680px);
       }
 
-      .photo {
-        width: 140px;
-        height: 140px;
+      .nav-links a:not(.nav-contact) {
+        display: none;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 70px;
+        padding-top: 150px;
+      }
+
+      .portrait-wrap {
+        width: min(90%, 450px);
+        min-height: auto;
+      }
+
+      .portrait-frame {
+        margin-left: 18px;
+      }
+
+      .research-grid,
+      .section-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .research-grid {
+        padding: 38px 0;
+      }
+
+      .content-section {
+        padding: 78px 0;
+      }
+
+      .contact-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    /* Mobile */
+
+    @media (max-width: 560px) {
+      .shell {
+        width: calc(100% - 32px);
+      }
+
+      .nav {
+        min-height: 76px;
+      }
+
+      .hero-grid {
+        padding-top: 118px;
+        padding-bottom: 74px;
       }
 
       h1 {
-        font-size: 1.8rem;
+        font-size: clamp(3.1rem, 17vw, 4.3rem);
+      }
+
+      .hero-copy {
+        font-size: 0.98rem;
+      }
+
+      .portrait-wrap {
+        width: calc(100% - 12px);
+      }
+
+      .affiliation {
+        left: -4px;
+        bottom: -34px;
+      }
+
+      .research-grid {
+        padding-top: 65px;
+      }
+
+      .pub {
+        grid-template-columns: 58px 1fr;
+        gap: 16px;
+      }
+
+      .pub-link {
+        grid-column: 2;
+      }
+
+      .contact-links {
+        width: 100%;
+      }
+
+      .contact-links .button {
+        flex: 1;
+      }
+
+      .footer-inner {
+        padding: 24px 0;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 6px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
       }
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
+  <header class="site-header">
+    <nav class="nav shell" aria-label="Primary navigation">
+      <a class="wordmark" href="#top">Hanjin Seo</a>
 
-    <section class="hero">
-      <img src="profile.jpeg" alt="Hanjin Seo profile photo" class="photo" />
-      <div>
-        <h1>Hanjin Seo</h1>
-        <div class="subtitle">
-          Postdoctoral Researcher | Synthetic Cells | Coacervates | Microfluidics
+      <div class="nav-links">
+        <a href="#research">Research</a>
+        <a href="#publications">Publications</a>
+        <a
+          href="./CV_Hanjin_Seo.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          CV
+        </a>
+        <a class="nav-contact" href="mailto:hseo@nd.edu">
+          Contact
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- Main hero section -->
+
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-grid shell">
+        <div>
+          <p class="eyebrow">
+            Postdoctoral Researcher · University of Notre Dame
+          </p>
+
+          <h1 id="hero-title">
+            Hanjin Seo
+            <em>builds synthetic life.</em>
+          </h1>
+
+          <p class="hero-copy">
+            I engineer
+            <strong>synthetic cell-like systems</strong>
+            by connecting soft matter, supramolecular assembly, and
+            microfluidics — with a growing focus on
+            machine-learning-guided lab automation.
+          </p>
+
+          <div class="actions" aria-label="Professional profiles">
+            <a
+              class="button primary"
+              href="https://scholar.google.com/citations?user=gKbcQtkAAAAJ&amp;hl=ko&amp;oi=ao"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Google Scholar
+            </a>
+
+            <a
+              class="button"
+              href="https://github.com/hanjin-seo"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
+            </a>
+          </div>
         </div>
-        <p class="intro">
-          I am a postdoctoral researcher studying synthetic cells, complex coacervates,
-          polymersomes, lipid nanoparticles, and microfluidic systems for biomaterials
-          and biomedical applications. I currently work with Prof. Matthew J. Webber at
-          the University of Notre Dame.
+
+        <div class="portrait-wrap">
+          <div class="portrait-frame">
+            <img
+              src="profile.jpeg"
+              alt="Portrait of Hanjin Seo"
+              class="portrait"
+            />
+
+            <div class="affiliation">
+              <span>Current appointment</span>
+              <strong>
+                Webber Lab · University of Notre Dame
+              </strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Research interests -->
+
+    <section
+      class="research-band"
+      id="research"
+      aria-labelledby="research-label"
+    >
+      <div class="research-grid shell">
+        <p class="band-label" id="research-label">
+          Research spectrum
         </p>
 
-        <div class="buttons">
-          <a class="btn primary" href="https://github.com/hanjin-seo" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a class="btn" href="https://scholar.google.com/citations?user=gKbcQtkAAAAJ&hl=ko&oi=ao" target="_blank" rel="noopener noreferrer">Google Scholar</a>
-          <a class="btn" href="./CV_Hanjin_Seo.pdf" target="_blank" rel="noopener noreferrer">CV</a>
-          <a class="btn" href="mailto:hseo@nd.edu">Email</a>
+        <div class="research-list">
+          <span>Complex Coacervates</span>
+          <span>Microfluidics</span>
+          <span>Protocells</span>
+          <span>Polymersomes</span>
+          <span>Lipid Nanoparticles</span>
+          <span>Hydrogels</span>
+          <span>Lab Automation</span>
         </div>
       </div>
     </section>
 
-    <section class="section">
-      <h2>Research Interests</h2>
-      <div class="chips">
-        <span class="chip">Microfluidics</span>
-        <span class="chip">Protocells</span>
-        <span class="chip">Giant Unilamellar Vesicles</span>
-        <span class="chip">Complex Coacervates</span>
-        <span class="chip">Lipid Nanoparticles</span>
-        <span class="chip">Hydrogels</span>
-        <span class="chip">Supramolecular Chemistry</span>
-        <span class="chip">ML-Guided Lab Automation</span>
+    <!-- Research introduction -->
+
+    <section
+      class="content-section"
+      aria-labelledby="about-title"
+    >
+      <div class="section-grid shell">
+        <p class="section-kicker">
+          Research vision
+        </p>
+
+        <div>
+          <h2 id="about-title">
+            Engineering compartments that behave more like life.
+          </h2>
+
+          <p class="about-lead">
+            My research explores how
+            <strong>coacervates, vesicles, and nanoparticles</strong>
+            can be programmed as biomimetic platforms and therapeutic
+            materials. I combine molecular self-assembly with microfluidic
+            engineering to control where reactions happen, how compartments
+            communicate, and how complex systems emerge — then use robotics
+            and machine learning to accelerate that discovery cycle.
+          </p>
+        </div>
       </div>
     </section>
 
-    <section class="section">
-      <h2>About</h2>
-      <p>
-        My research focuses on constructing biomimetic systems that connect soft matter,
-        supramolecular assembly, and microfluidic engineering. I am interested in how
-        compartmentalized materials such as coacervates, vesicles, and nanoparticles can be
-        designed as synthetic cell-like platforms and therapeutic materials. I am also
-        interested in robot-based lab automation with machine learning-guided experiments.
-      </p>
+    <!-- Publications -->
+
+    <section
+      class="content-section publications"
+      id="publications"
+      aria-labelledby="publications-title"
+    >
+      <div class="section-grid shell">
+        <p class="section-kicker">
+          Selected work
+        </p>
+
+        <div>
+          <h2 id="publications-title">
+            Publications
+          </h2>
+
+          <div class="pub-list">
+            <article class="pub">
+              <div class="pub-year">
+                2025
+              </div>
+
+              <div>
+                <h3>
+                  Salt-Bridge-Mediated Coacervate-to-Vesicle
+                  Transformation in Arginine-Rich Coacervates
+                </h3>
+
+                <div class="pub-meta">
+                  <em>ACS Nano</em>
+                </div>
+              </div>
+
+              <a
+                class="pub-link"
+                href="https://doi.org/10.1021/acsnano.5c02235"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View DOI ↗
+              </a>
+            </article>
+
+            <article class="pub">
+              <div class="pub-year">
+                2024
+              </div>
+
+              <div>
+                <h3>
+                  Programmable Enzymatic Reaction Network in
+                  Artificial Cell-Like Polymersomes
+                </h3>
+
+                <div class="pub-meta">
+                  <em>Advanced Science</em>
+                </div>
+              </div>
+
+              <a
+                class="pub-link"
+                href="https://doi.org/10.1002/advs.202305760"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View DOI ↗
+              </a>
+            </article>
+
+            <article class="pub">
+              <div class="pub-year">
+                2022
+              </div>
+
+              <div>
+                <h3>
+                  Spatiotemporal Control of Signal-Driven Enzymatic
+                  Reaction in Artificial Cell-Like Polymersomes
+                </h3>
+
+                <div class="pub-meta">
+                  <em>Nature Communications</em>
+                </div>
+              </div>
+
+              <a
+                class="pub-link"
+                href="https://doi.org/10.1038/s41467-022-32889-7"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View DOI ↗
+              </a>
+            </article>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section class="section">
-      <h2>Selected Publications</h2>
+    <!-- Contact -->
 
-      <div class="pub">
-        <div class="pub-title">Salt-Bridge-Mediated Coacervate-to-Vesicle Transformation in Arginine-Rich Coacervates</div>
-        <div class="pub-meta">ACS Nano, 2025</div>
-        <a href="https://doi.org/10.1021/acsnano.5c02235" target="_blank" rel="noopener noreferrer">DOI</a>
-      </div>
+    <section
+      class="contact-strip"
+      aria-labelledby="contact-title"
+    >
+      <div class="contact-inner shell">
+        <h2 id="contact-title">
+          Let’s build the next generation of biomimetic systems.
+        </h2>
 
-      <div class="pub">
-        <div class="pub-title">Programmable Enzymatic Reaction Network in Artificial Cell-Like Polymersomes</div>
-        <div class="pub-meta">Advanced Science, 2024</div>
-        <a href="https://doi.org/10.1002/advs.202305760" target="_blank" rel="noopener noreferrer">DOI</a>
-      </div>
+        <div class="contact-links">
+          <a
+            class="button primary"
+            href="mailto:hseo@nd.edu"
+          >
+            Email me
+          </a>
 
-      <div class="pub">
-        <div class="pub-title">Spatiotemporal Control of Signal-Driven Enzymatic Reaction in Artificial Cell-Like Polymersomes</div>
-        <div class="pub-meta">Nature Communications, 2022</div>
-        <a href="https://doi.org/10.1038/s41467-022-32889-7" target="_blank" rel="noopener noreferrer">DOI</a>
+          <a
+            class="button"
+            href="./CV_Hanjin_Seo.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View CV
+          </a>
+        </div>
       </div>
     </section>
+  </main>
 
-    <div class="footer">
-      © 2026 Hanjin Seo
+  <footer>
+    <div class="footer-inner shell">
+      <span>© 2026 Hanjin Seo</span>
+      <span>
+        Postdoctoral Researcher · Notre Dame, Indiana
+      </span>
     </div>
-  </div>
+  </footer>
 </body>
 </html>
